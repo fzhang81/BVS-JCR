@@ -1,3 +1,35 @@
+################################################################################
+# Project: Bayesian Variable Selection via Joint Credible Regions
+#
+# Description:
+#   This script implements a Bayesian variable selection method for computer 
+#   experiments (demonstrated here on the Borehole function). It identifies 
+#   active variables by constructing a Joint Credible Region (JCR) based on 
+#   a generated orthogonal "inert" (dummy) variable. Variables whose posterior 
+#   parameters fall outside this reference region are classified as active.
+#
+# Methodology:
+#   1. Generates an inert variable orthogonal to the original design matrix.
+#   2. Fits a Gaussian Process model with an ARD kernel using Stan (MCMC).
+#   3. Constructs a 95% Joint Credible Region (ellipse) using the posterior 
+#      samples of the inert variable's parameters.
+#   4. Visualizes the selection boundary and classifies variables.
+#
+# Dependencies:
+#   - R (>= 4.0.0)
+#   - Libraries: rstan, MASS, car
+#   - External Files:
+#       - Stan model: 'L_cov_exp_quad_ARD5_samplesigma.stan'
+#       - Data: Design matrix (X) and Response (y) CSV files
+#
+# Outputs:
+#   - Console: Progress of MCMC replication and final list of selected variables.
+#   - Plot: A visualization showing the elliptical selection boundary (JCR) 
+#     and the position of each variable relative to the inert baseline.
+#
+# Date: December 2025
+################################################################################
+
 # Bayesian Variable Selection using Joint Credible Regions
 library(rstan)
 library(MASS)
